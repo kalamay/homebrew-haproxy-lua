@@ -5,6 +5,11 @@ class Haproxy < Formula
   sha256 "a3952644ef939b36260d91d81a335636aa9b44572b4cb8b6001272f88545c666"
   license "GPL-2.0-or-later" => { with: "openvpn-openssl-exception" }
 
+  livecheck do
+    url :homepage
+    regex(/href=.*?haproxy[._-]v?(\d+(?:\.\d+)+)\.t/i)
+  end
+
   depends_on "openssl@3"
   depends_on "pcre2"
   depends_on "lua"
@@ -14,11 +19,18 @@ class Haproxy < Formula
 
   def install
     lua = Formula["lua"]
+    target = if OS.mac?
+      "osx"
+    else
+      "linux-glibc"
+    end
+
     args = %W[
-      TARGET=generic
+      TARGET=#{target}
       USE_KQUEUE=1
       USE_POLL=1
-      USE_PCRE=1
+      USE_PCRE2=1
+      USE_PCRE2_JIT=1
       USE_OPENSSL=1
       USE_THREAD=1
       USE_ZLIB=1
