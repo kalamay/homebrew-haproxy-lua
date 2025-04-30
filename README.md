@@ -8,9 +8,10 @@ brew install haproxy --with-lua
 
 But then, everything changed when [this][3] happened.
 
-We at Batterii want to use HAProxy with Lua in our development environment, and
-most of our developers work on MacOS. We've been unable to find a tap to replace
-what used to be in the homebrew core, so we're just going to make it ourselves.
+> [!NOTE] 
+> This is a fork from [Batterii/homebrew-haproxy-lua][5] with updates to support
+> the newest haproxy features and homebrew changes. I'd happily merge these
+> changes there, but it looks like the repo is no longer accepting updates.
 
 This is pretty much the same Formula as the one in homebrew core, but with the
 old conditional Lua dependency and compilation args put back in.
@@ -23,9 +24,9 @@ a better idea of what you're doing than I do, feel free to contribute. :)
 
 ## Installation
 ```
-brew tap batterii/haproxy-lua
+brew tap kalamay/haproxy-lua
 
-brew install batterii/haproxy-lua/haproxy
+brew install kalamay/haproxy-lua/haproxy
 
 brew services start haproxy
 ```
@@ -46,14 +47,18 @@ brew services restart haproxy
 ```
 
 ## A Note on Naming
-We named the formula "haproxy," which is the same as the one in core. The
-Homebrew docs recommend against doing this since it prevents packages with
-shared names from being installed side-by-side. I honestly doubt, however, that
-anybody will need to have a side-by-side install of HAProxy-- one with Lua and
-one without. So the name is kept the same for convience and compatbility with
-existing tooling.
+
+> [!WARNING]
+> We named the formula `haproxy`, which is the same as the one in core. The
+> Homebrew docs recommend against doing this since it prevents packages with
+> shared names from being installed side-by-side. I honestly doubt, however, that
+> anybody will need to have a side-by-side install of both build configurations:
+> one with Lua and one without. This Lua build has all the same features as the
+> core version, just with the addition of Lua. So the name is kept the same for
+> convience and compatbility with existing tooling.
 
 [1]: http://www.haproxy.org/
 [2]: https://www.lua.org/about.html
 [3]: https://github.com/Homebrew/homebrew-core/issues/31510
 [4]: http://cbonte.github.io/haproxy-dconv/2.2/configuration.html
+[5]: https://github.com/Batterii/homebrew-haproxy-lua
