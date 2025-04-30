@@ -1,11 +1,16 @@
 class Haproxy < Formula
   desc "Reliable, high performance TCP/HTTP load balancer"
   homepage "https://www.haproxy.org/"
-  url "https://www.haproxy.org/download/2.2/src/haproxy-2.2.10.tar.gz"
-  sha256 "a027e9cd8f703ba48dc193f5ae34d9aa152221f67ab58a4e939c96b9f4edd3bc"
-  depends_on "openssl@1.1"
-  depends_on "pcre"
+  url "https://www.haproxy.org/download/3.1/src/haproxy-3.1.7.tar.gz"
+  sha256 "a3952644ef939b36260d91d81a335636aa9b44572b4cb8b6001272f88545c666"
+  license "GPL-2.0-or-later" => { with: "openvpn-openssl-exception" }
+
+  depends_on "openssl@3"
+  depends_on "pcre2"
   depends_on "lua"
+
+  uses_from_macos "libxcrypt"
+  uses_from_macos "zlib"
 
   def install
     lua = Formula["lua"]
